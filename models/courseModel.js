@@ -9,10 +9,12 @@ const courseSchema = new mongoose.Schema({
         required:[true,'A Model Must have Name'],
     },
     image:{
-        type:String
+        type:String,
+        required:[true,'A Model Must have a Image']
     },
     description:{
-        type: String
+        type: String,
+        required:[true,'A Model Must have description']
     },
     duration :{
         type:Number,

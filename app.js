@@ -35,6 +35,7 @@ var uploads = multer({
 app.use(express.static('view'))
 app.use(express.urlencoded({extended:true}))
 app.use(express.json());
+app.use('./uploads',express.static('uploads'))
 app.set('view engine', 'ejs')
 app.use((req,res,next)=>{
     req.requstTime = new Date().toISOString();

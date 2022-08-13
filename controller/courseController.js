@@ -19,10 +19,22 @@ exports.getAllCourse = async(req ,res)=>{
             message:err,
         })
     }
-};
+}
+
 exports.createCourse = async (req, res)=> {
     try {
-        const newCourse = await Course.create(req.body);
+        const newCourse = new Course({
+            program: req.body.program,
+            type: req.body.type,
+            description: req.body.description,
+            duration: req.body.duration,
+            outcome: req.body.outcome,
+            fee: req.body.fee
+        });
+        if(req.file){
+            newCourse.image = req.file.path
+        }
+        newCourse.save();
         res.status(201).json({
             status: 'success',
             data:{
@@ -32,7 +44,7 @@ exports.createCourse = async (req, res)=> {
     } catch (err) {
         res.status(400).json({
             status: 'failed',
-            message:err,
+            message:err
         });
     }
 };
