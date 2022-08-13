@@ -1,5 +1,6 @@
 const Course = require('../models/courseModel')
 const app = require('../app')
+
 exports.getAllCourse = async(req ,res)=>{
     try {
         const course = await Course.find();
@@ -10,13 +11,15 @@ exports.getAllCourse = async(req ,res)=>{
                 course
             }
         })
+
+    
     } catch (err) {
         res.status(404).json({
             status:'fail',
             message:err,
         })
     }
-}
+};
 exports.createCourse = async (req, res)=> {
     try {
         const newCourse = await Course.create(req.body);
