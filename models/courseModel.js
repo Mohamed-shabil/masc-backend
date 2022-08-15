@@ -28,15 +28,10 @@ const courseSchema = new mongoose.Schema({
         type:String,
         required:[true,'A Program Must have OutCome']
     },
-    // materials:{
-    //     semster:{
-    //         type:Number,
-            // required:[true,'A Program Must have materials']
-    //     },
-    //     file:{
-    //         type : String
-    //     }
-    // }
+    course:{
+        semester:Number,
+        subject:[]
+    }
 
 });
 const Course = mongoose.model('Course', courseSchema);
