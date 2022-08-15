@@ -1,9 +1,7 @@
 const mongoose = require('mongoose');
 
 const gallerySchema = new mongoose.Schema({
-    gallery:{
-        type:String
-    }
+    gallery:[]
 })
 const Gallery = mongoose.model('Gallery', gallerySchema);
 

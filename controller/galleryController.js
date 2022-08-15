@@ -21,7 +21,10 @@ exports.getAllGallery = async (req,res)=>{
 
 exports.createGallery=async(req,res) =>{
     try {
-        const newGallery = await Gallery(req.body);
+        console.log(req.files.gallery[0].path)
+        const newGallery = await new Gallery({
+            gallery:req.files.gallery[0].path
+        });
         res.status(200).json({
             status:'success',
             data:{

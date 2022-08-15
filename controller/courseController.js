@@ -40,7 +40,7 @@ exports.getCourse = async (req,res)=>{
 
 exports.createCourse = async (req, res)=> {
     try {
-        const newCourse = new Course({
+        const  newCourse = await new Course({
             program: req.body.program,
             type: req.body.type,
             description: req.body.description,

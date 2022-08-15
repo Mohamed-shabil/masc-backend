@@ -7,7 +7,7 @@ const uploads= require('../middleware/upload')
 router
 .route('/')
 .get(galleryController.getAllGallery)
-// .post(galleryController.createGallery)
+.post(uploads,galleryController.createGallery)
 
 // router
 // .route('/:id')
