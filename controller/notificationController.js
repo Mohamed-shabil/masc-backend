@@ -40,7 +40,10 @@ exports.deleteNotification=async (req,res)=>{
 
     try {
         console.log(req.params.id)
-        await Notification.findByIdAndDelete(req.params.id);
+        // await Notification.findByIdAndDelete(req.params.id);
+        if(req.files){
+            
+        }
         res.status(200).json({
             status:'success',
             data:null

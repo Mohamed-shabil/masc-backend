@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const subjects = require('./materialModel')
 const courseSchema = new mongoose.Schema({
     program:{
         type:String,
@@ -27,10 +28,6 @@ const courseSchema = new mongoose.Schema({
     outcome:{
         type:String,
         required:[true,'A Program Must have OutCome']
-    },
-    course:{
-        semester:Number,
-        subject:[]
     }
 
 });

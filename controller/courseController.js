@@ -57,14 +57,14 @@ exports.createCourse = async (req, res)=> {
         if(req.files.image[0].fieldname=='image'){
             newCourse.image = req.files.image[0].path
         }
-        if(req.files.material[0].fieldname=='material'){
-            material = req.files.material[0].path
-            subname=req.body.subjects
-            newCourse.course.subject={
-                name:subname,
-                materials:material
-            }
-        }
+        // if(req.files.material[0].fieldname=='material'){
+        //     material = req.files.material[0].path
+        //     subname=req.body.subjects
+        //     newCourse.course.subject={
+        //         name:subname,
+        //         materials:material
+        //     }
+        // }
         newCourse.save();
         res.status(201).json({
             status: 'success',
