@@ -3,7 +3,7 @@ const app = require('../app')
 
 exports.getMaterial = async(req ,res)=>{
     try {
-        const material = await Material.find({}).select({program:req.body.program,semester:req.body.semester});
+        const material = await Material.find({program:req.body.program,sem: req.body.sem})
 
         res.status(200).json({
             status: 'success',

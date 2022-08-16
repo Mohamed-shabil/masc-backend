@@ -8,7 +8,7 @@ exports.getAllGallery = async (req,res)=>{
             status:'success',
             results:Gallery.length,
             data:{
-                gallery   
+                gallery
             }
         })
     } catch (err) {
@@ -21,9 +21,11 @@ exports.getAllGallery = async (req,res)=>{
 
 exports.createGallery=async(req,res) =>{
     try {
-        console.log(req.files.gallery[0].path)
+        console.log(req.files.gallery)
         const newGallery = await new Gallery({
-            gallery:req.files.gallery[0].path
+            gallery:{
+                link:req.files.gallery[0].path
+            }
         });
         res.status(200).json({
             status:'success',
@@ -39,19 +41,18 @@ exports.createGallery=async(req,res) =>{
     }
 }
 
-// exports.deleteNotification=async (req,res)=>{
-
-//     try {
-//         console.log(req.params.id)
-//         await Notification.findByIdAndDelete(req.params.id);
-//         res.status(200).json({
-//             status:'success',
-//             data:null
-//         })
-//     } catch (err) {
-//         res.status(404).json({
-//             status: "fail",
-//             message: err
-//           });
-//     }
-// }
+exports.deleteGallery=async (req,res)=>{
+    try {
+        console.log(req.params.id)
+        await Gallery.findByIdAndDelete(req.params.id);
+        res.status(200).json({
+            status:'success',
+            data:null
+        })
+    } catch (err) {
+        res.status(404).json({
+            status: "fail",
+            message: err
+          });
+    }
+}

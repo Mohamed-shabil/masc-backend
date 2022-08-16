@@ -9,8 +9,8 @@ router
 .get(galleryController.getAllGallery)
 .post(uploads,galleryController.createGallery)
 
-// router
-// .route('/:id')
-// .delete(galleryController.deleteGallery);
+router
+.route('/:id')
+.delete(galleryController.deleteGallery);
 
 module.exports=router;
