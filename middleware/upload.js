@@ -25,6 +25,6 @@ uploads = multer({
     }
 })
 
-const multipleUpload = uploads.fields([{name:'image',maxCount:1},{name:'material',maxCount:1},{name:'gallery',maxCount:1},{name:'material',maxCount:1}]); 
+const multipleUpload = uploads.fields([{name:'image',maxCount:1},{name:'material',maxCount:1},{name:'gallery',maxCount:1}]); 
 
 module.exports = multipleUpload

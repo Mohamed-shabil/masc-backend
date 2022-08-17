@@ -9,16 +9,9 @@ const ejs =('ejs')
 const app = express()
 
 
-app.use(express.static('view'))
 app.use(express.urlencoded({extended:true}))
 app.use(express.json());
-app.set('view engine', 'ejs')
-
-app.use((req,res,next)=>{
-    req.requstTime = new Date().toISOString();
-    next();
-})
-
+app.use('/uploads',express.static('uploads'))
 
 app.use('/api/v1/course',courseRoute);
 app.use('/api/v1/gallery',galleryRoute);
