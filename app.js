@@ -1,7 +1,7 @@
 const express = require('express')
 const courseRoute = require('./router/courseRoute')
 const notificationRoute = require('./router/notificationRoute')
-const galleryRoute = require('./router/galleryRoute')
+const galleryRoute = require('./router/GalleryRoute')
 const materialRoute = require('./router/MaterialRoute')
 const userRoute = require('./router/userRoute')
 const { notFound, errorHandler } = require('./middleware/errorMiddleware.js')

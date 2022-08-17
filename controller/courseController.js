@@ -40,6 +40,7 @@ exports.getCourse = async (req,res)=>{
 
 exports.createCourse = async (req, res)=> {
     try {
+        console.log(req.body)
         const  newCourse = await new Course({
             program: req.body.program,
             type: req.body.type,
@@ -47,24 +48,14 @@ exports.createCourse = async (req, res)=> {
             duration: req.body.duration,
             outcome: req.body.outcome,
             fee: req.body.fee,
-            // course:{
-            //     semester:req.body.semester,
-            //     subject:[{
-            //         name:req.body.subjects,
-            //     }]
-            // }
+            image:req.files.image[0].path
         });
-        if(req.files.image[0].fieldname=='image'){
-            newCourse.image = req.files.image[0].path
-        }
-        // if(req.files.material[0].fieldname=='material'){
-        //     material = req.files.material[0].path
-        //     subname=req.body.subjects
-        //     newCourse.course.subject={
-        //         name:subname,
-        //         materials:material
-        //     }
+        console.log(newCourse);
+        // if(req.files.image[0].fieldname=='image'){
+        //     newCourse.image = req.files.image[0].path
         // }
+
+        
         newCourse.save();
         res.status(201).json({
             status: 'success',
