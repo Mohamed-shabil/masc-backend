@@ -7,7 +7,7 @@ const userRoute = require('./router/userRoute')
 const { notFound, errorHandler } = require('./middleware/errorMiddleware.js')
 const multer = require('multer')
 const path = require('path')
-const ejs = 'ejs'
+const ejs = require('ejs')
 const app = express()
 
 app.use(express.urlencoded({ extended: true }))
