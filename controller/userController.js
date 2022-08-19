@@ -4,8 +4,9 @@ const User = require('../models/userModel.js')
 
 const authUser = asyncHandler(async (req, res) => {
   const { username, password } = req.body
-
+  
   const user = await User.findOne({ username })
+  console.log(await user.matchPassword(password));
 
   if (user && (await user.matchPassword(password))) {
     res.json({

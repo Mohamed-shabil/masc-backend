@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const gallerySchema = new mongoose.Schema({
-    images:{
+    gallery:{
         link:{
             type:String,
             required:[true,'Must have a String']

@@ -1,5 +1,8 @@
 const Course = require('../models/courseModel')
 const app = require('../app')
+const fs = require('fs');
+const {promisify} = require('util');
+const unlinkAsync= promisify(fs.unlink);
 
 exports.getAllCourse = async(req ,res)=>{
     try {
@@ -22,7 +25,6 @@ exports.getAllCourse = async(req ,res)=>{
 }
 exports.getCourse = async (req,res)=>{
     try {
-        console.log(req.params.id);
         const course = await Course.findById(req.params.id);  
         res.status(200).json({
             status:'success',
@@ -40,8 +42,7 @@ exports.getCourse = async (req,res)=>{
 
 exports.createCourse = async (req, res)=> {
     try {
-        console.log(req.body)
-        const  newCourse = await new Course({
+        const  newCourse = new Course({
             program: req.body.program,
             type: req.body.type,
             description: req.body.description,
@@ -50,13 +51,9 @@ exports.createCourse = async (req, res)=> {
             fee: req.body.fee,
             image:req.files.image[0].path
         });
-        console.log(newCourse);
-        // if(req.files.image[0].fieldname=='image'){
-        //     newCourse.image = req.files.image[0].path
-        // }
 
         
-        newCourse.save();
+        await newCourse.save();
         res.status(201).json({
             status: 'success',
             data:{
@@ -73,11 +70,14 @@ exports.createCourse = async (req, res)=> {
 
 exports.deleteCourse = async (req,res) => {
     try{ 
+        const deleteCourse = await Course.findById(req.params.id);
+        const courseImagePath = deleteCourse.image
       await Course.findByIdAndDelete(req.params.id);
       res.status(204).json({
         status: "success",
         data: 'Deleted'
       });
+    await unlinkAsync(courseImagePath)
     }catch(err){
       res.status(404).json({
         status: "fail",

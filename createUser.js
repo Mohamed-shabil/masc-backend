@@ -1,6 +1,7 @@
 const mongoose = require('mongoose')
 const dotenv = require('dotenv')
 const User = require('./models/userModel.js')
+const bcrypt = require('bcryptjs')
 
 dotenv.config({ path: './config.env' })
 
@@ -14,17 +15,18 @@ mongoose.connect(DB).then((con) => {
 
 const importUser = async () => {
   try {
+
     const user = {
-      username: 'username',
-      password: bcrypt.hashSync('password', 10),
+      username: 'mascadmin',
+      password: 'password',
     }
+    console.log(user);
 
     await User.create(user)
 
-    console.log('User created!'.green.inverse)
+    console.log('User created!')
     process.exit()
   } catch (error) {
-    console.error(`${error}`.red.inverse)
     process.exit(1)
   }
 }

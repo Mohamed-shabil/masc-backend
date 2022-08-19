@@ -1,5 +1,9 @@
 const app = require('./../app');
 const Notification = require('./../models/notificationModel');
+const fs = require('fs');
+const {promisify} = require('util');
+
+const unlinkAsync= promisify(fs.unlink);
 
 exports.getAllnotification = async (req,res)=>{
     try {
@@ -21,7 +25,17 @@ exports.getAllnotification = async (req,res)=>{
 
 exports.createNotification=async(req,res) =>{
     try {
-        const newNotification = await Notification.create(req.body);
+        let newNotification;
+        if(req.files){
+            newNotification = new Notification({
+                content: req.files.content[0].path
+            }) ;
+        }else if(req.body){
+            newNotification = new Notification({
+                content:req.body.content
+            });
+        }
+        await newNotification.save();
         res.status(200).json({
             status:'success',
             data:{
@@ -36,18 +50,18 @@ exports.createNotification=async(req,res) =>{
     }
 }
 
-exports.deleteNotification=async (req,res)=>{
+exports.deleteNotification= async (req,res)=>{
 
     try {
-        console.log(req.params.id)
-        // await Notification.findByIdAndDelete(req.params.id);
-        if(req.files){
-            
-        }
+        const deleteNotification = await Notification.findById(req.params.id);
+        const notificationPath = deleteNotification.content;
+        console.log(notificationPath);
+        await Notification.findByIdAndDelete(req.params.id);
         res.status(200).json({
             status:'success',
             data:null
         })
+        await unlinkAsync(notificationPath)
     } catch (err) {
         res.status(404).json({
             status: "fail",

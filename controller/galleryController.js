@@ -1,6 +1,11 @@
 const app = require('./../app');
 const Gallery = require('./../models/galleryModel');
 
+const fs = require('fs');
+const {promisify} = require('util');
+
+const unlinkAsync= promisify(fs.unlink);
+
 exports.getAllGallery = async (req,res)=>{
     try {
         const gallery = await Gallery.find();
@@ -24,11 +29,12 @@ exports.getAllGallery = async (req,res)=>{
 exports.createGallery=async(req,res) =>{
     try {
         console.log(req.files.gallery)
-        const newGallery = await new Gallery({
-            images:{
+        const newGallery = new Gallery({
+            gallery:{
                 link:req.files.gallery[0].path
             }
         });
+        await newGallery.save();
         console.log(newGallery);
         res.status(200).json({
             status:'success',
@@ -44,12 +50,14 @@ exports.createGallery=async(req,res) =>{
 
 exports.deleteGallery=async (req,res)=>{
     try {
-        console.log(req.params.id)
+        const deleteimage = await Gallery.findById(req.params.id);
+        const imagepath = deleteimage.gallery.link;
         await Gallery.findByIdAndDelete(req.params.id);
         res.status(200).json({
             status:'success',
             data:null
         })
+        await unlinkAsync(imagepath)
     } catch (err) {
         res.status(404).json({
             status: "fail",
