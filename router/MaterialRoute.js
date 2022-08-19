@@ -8,10 +8,10 @@ const {protect} = require('../middleware/authMiddleware')
 router
 .route('/')
 .get(materialController.getMaterial)
-.post(uploads,materialController.createMaterial)
+.post(protect,uploads,materialController.createMaterial)
 
 router
 .route('/:id')
-.delete(materialController.deleteMaterial)
+.delete(protect,materialController.deleteMaterial)
 
 module.exports=router;
