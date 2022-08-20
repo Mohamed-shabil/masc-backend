@@ -41,6 +41,7 @@ exports.getCourse = async (req,res)=>{
 }
 
 exports.createCourse = async (req, res)=> {
+   
     try {
         const  newCourse = new Course({
             program: req.body.program,
@@ -49,7 +50,7 @@ exports.createCourse = async (req, res)=> {
             duration: req.body.duration,
             outcome: req.body.outcome,
             fee: req.body.fee,
-            image:req.files.image[0].path
+            image:req.files.image[0].filename
         });
 
         
