@@ -7,7 +7,9 @@ const unlinkAsync= promisify(fs.unlink);
 
 exports.getMaterial = async(req ,res)=>{
     try {
-        const material = await Material.find({program:req.body.program,sem: req.body.sem})
+        const material = await Material.find(
+            // {program:req.body.program,sem: req.body.sem}
+            )
 
         res.status(200).json({
             status: 'success',

@@ -8,10 +8,10 @@ const {protect} = require('../middleware/authMiddleware')
 router
 .route('/')
 .get(galleryController.getAllGallery)
-.post(uploads,galleryController.createGallery)
+.post(protect,uploads,galleryController.createGallery)
 
 router
 .route('/:id')
-.delete(galleryController.deleteGallery);
+.delete(protect,galleryController.deleteGallery);
 
 module.exports=router;

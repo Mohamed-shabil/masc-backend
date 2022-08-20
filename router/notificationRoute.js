@@ -6,11 +6,11 @@ const {protect} = require('../middleware/authMiddleware')
 router
 .route('/')
 .get(notificationController.getAllnotification)
-.post(uploads,notificationController.createNotification)
+.post(protect,uploads,notificationController.createNotification)
 
 router
 .route('/:id')
-.delete(notificationController.deleteNotification);
+.delete(protect,notificationController.deleteNotification);
 
 
 

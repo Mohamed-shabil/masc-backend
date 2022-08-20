@@ -8,12 +8,12 @@ const {protect} = require('../middleware/authMiddleware')
 router
 .route('/')
 .get(courseController.getAllCourse)
-.post(uploads,courseController.createCourse)
+.post(protect,uploads,courseController.createCourse)
 
 router
 .route('/:id')
 .get(courseController.getCourse)
-.delete(courseController.deleteCourse)
+.delete(protect,courseController.deleteCourse)
 
 
 module.exports=router;

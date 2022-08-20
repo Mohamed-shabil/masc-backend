@@ -26,11 +26,12 @@ exports.getAllnotification = async (req,res)=>{
 exports.createNotification=async(req,res) =>{
     try {
         let newNotification;
-        if(req.files){
+        if(req.files?.content){
             newNotification = new Notification({
                 content: req.files.content[0].path
             }) ;
-        }else if(req.body){
+        }
+        if(req.body?.content){
             newNotification = new Notification({
                 content:req.body.content
             });
@@ -55,7 +56,7 @@ exports.deleteNotification= async (req,res)=>{
     try {
         const deleteNotification = await Notification.findById(req.params.id);
         const notificationPath = deleteNotification.content;
-        console.log(notificationPath);
+       
         await Notification.findByIdAndDelete(req.params.id);
         res.status(200).json({
             status:'success',
