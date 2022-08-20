@@ -9,8 +9,10 @@ const { notFound, errorHandler } = require("./middleware/errorMiddleware.js");
 const multer = require("multer");
 const path = require("path");
 const ejs = require("ejs");
+const cors = require("cors");
 const app = express();
 
+app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use("/uploads", express.static("uploads"));
