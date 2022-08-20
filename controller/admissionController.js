@@ -4,7 +4,6 @@ const Admission = require("./../models/admisionModel");
 exports.getAlladmission = async (req, res) => {
   try {
     const admission = await Admission.find();
-    console.log(admission);
     res.status(200).json({
       status: "success",
       results: admission.length,
@@ -41,7 +40,7 @@ exports.createAdmission = async (req, res) => {
 
 exports.deleteAdmission = async (req, res) => {
   try {
-    await Gallery.findByIdAndDelete(req.params.id);
+    await Admission.findByIdAndDelete(req.params.id);
     res.status(200).json({
       status: "success",
       data: null,
