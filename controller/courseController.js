@@ -41,7 +41,7 @@ exports.getCourse = async (req,res)=>{
 }
 
 exports.createCourse = async (req, res)=> {
-   
+    console.log(req.files.image[0])
     try {
         const  newCourse = new Course({
             program: req.body.program,
